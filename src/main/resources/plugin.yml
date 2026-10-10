@@ -1,0 +1,21 @@
+name: CrateCore
+version: ${project.version}
+main: dev.cratecore.CrateCore
+api-version: '1.21'
+description: Key-based crates with weighted rewards and a preview menu
+depend: [Vault]
+softdepend: [EssentialsX]
+
+commands:
+  crate:
+    description: Crate commands
+    usage: /crate <preview|set|remove|givekey|list|reload>
+    aliases: [crates]
+
+permissions:
+  cratecore.use:
+    description: Open and preview crates
+    default: true
+  cratecore.admin:
+    description: Place and remove crates, give keys, reload
+    default: op

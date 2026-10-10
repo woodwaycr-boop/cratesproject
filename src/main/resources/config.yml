@@ -1,0 +1,171 @@
+# CrateCore configuration
+# Names use MiniMessage format: https://docs.advntr.dev/minimessage/format.html
+#
+# Each reward's "chance" is a relative weight, not a percentage. The preview menu shows each
+# weight as a percentage of the crate's total. A reward can give any mix of:
+#   money:    amount paid through Vault
+#   items:    list of "MATERIAL:amount", for example "DIAMOND:8"
+#   commands: run by the console, %player% is replaced with the winner's name
+#             (use these for enchanted items, ranks, permissions, other plugins)
+# Other options per reward:
+#   display-name, icon (menu item)
+#   broadcast:  true = announce the win to the whole server
+#   great-win:  true/false = force or forbid the fireworks celebration. If you leave it out,
+#               a reward counts as a great win when its chance is at or below
+#               animation.great-win-chance-percent (below).
+#
+# Amounts below are placeholders. Tune them against your server's economy.
+# The preview menu fits 28 rewards per crate.
+
+# The opening animation. All of these are optional: anything you delete falls back to a built-in default.
+animation:
+  # false = open instantly with no reel.
+  enabled: true
+  # How many times the reel moves before it stops. More = a longer spin.
+  steps: 40
+  # The reel starts fast (1 tick per move) and slows down to this many ticks per move. 20 ticks = 1 second.
+  max-delay-ticks: 9
+  # How long the menu stays open on the winning reward, in ticks.
+  celebration-ticks: 40
+  # Rewards at or below this chance (in percent) are "great wins": fireworks, extra sounds, special title.
+  great-win-chance-percent: 5
+  # How many fireworks a great win launches. They are decoration only and deal no damage.
+  great-win-fireworks: 8
+  # Sound ids. Vanilla names work, and so do sounds from a resource pack. Leave one empty ("") to silence it.
+  sounds:
+    start: "minecraft:block.ender_chest.open"
+    tick: "minecraft:block.note_block.hat"
+    win: "minecraft:entity.player.levelup"
+    great-win: "minecraft:ui.toast.challenge_complete"
+    great-win-note: "minecraft:block.note_block.bell"
+    no-key: "minecraft:entity.villager.no"
+
+crates:
+  common:
+    display-name: "<gray>Common Crate"
+    key:
+      name: "<gray>Common Key"
+      material: TRIPWIRE_HOOK
+    rewards:
+      small-cash:
+        chance: 40
+        display-name: "<green>$250"
+        icon: GOLD_NUGGET
+        money: 250
+      iron:
+        chance: 30
+        display-name: "<white>16 Iron Ingots"
+        icon: IRON_INGOT
+        items:
+          - "IRON_INGOT:16"
+      bread:
+        chance: 20
+        display-name: "<yellow>32 Bread"
+        icon: BREAD
+        items:
+          - "BREAD:32"
+      diamonds:
+        chance: 10
+        display-name: "<aqua>4 Diamonds"
+        icon: DIAMOND
+        items:
+          - "DIAMOND:4"
+
+  rare:
+    display-name: "<blue>Rare Crate"
+    key:
+      name: "<blue>Rare Key"
+      material: TRIPWIRE_HOOK
+    rewards:
+      cash:
+        chance: 35
+        display-name: "<green>$1,000"
+        icon: GOLD_INGOT
+        money: 1000
+      diamonds:
+        chance: 30
+        display-name: "<aqua>12 Diamonds"
+        icon: DIAMOND
+        items:
+          - "DIAMOND:12"
+      golden-apples:
+        chance: 20
+        display-name: "<gold>8 Golden Apples"
+        icon: GOLDEN_APPLE
+        items:
+          - "GOLDEN_APPLE:8"
+      emeralds:
+        chance: 12
+        display-name: "<green>32 Emeralds"
+        icon: EMERALD
+        items:
+          - "EMERALD:32"
+      netherite-scrap:
+        chance: 3
+        display-name: "<dark_red>4 Netherite Scrap"
+        icon: NETHERITE_SCRAP
+        broadcast: true
+        items:
+          - "NETHERITE_SCRAP:4"
+
+  legendary:
+    display-name: "<gold><bold>Legendary Crate"
+    key:
+      name: "<gold><bold>Legendary Key"
+      material: TRIPWIRE_HOOK
+    rewards:
+      big-cash:
+        chance: 35
+        display-name: "<green>$10,000"
+        icon: GOLD_BLOCK
+        money: 10000
+      diamond-blocks:
+        chance: 30
+        display-name: "<aqua>8 Diamond Blocks"
+        icon: DIAMOND_BLOCK
+        items:
+          - "DIAMOND_BLOCK:8"
+      netherite-ingots:
+        chance: 20
+        display-name: "<dark_red>4 Netherite Ingots"
+        icon: NETHERITE_INGOT
+        items:
+          - "NETHERITE_INGOT:4"
+      totems:
+        chance: 12
+        display-name: "<yellow>3 Totems of Undying"
+        icon: TOTEM_OF_UNDYING
+        items:
+          - "TOTEM_OF_UNDYING:3"
+      elytra:
+        chance: 3
+        display-name: "<light_purple>Elytra"
+        icon: ELYTRA
+        broadcast: true
+        items:
+          - "ELYTRA:1"
+
+messages:
+  prefix: "<dark_gray>[<gold>Crates</gold>]</dark_gray> "
+  no-permission: "<red>You don't have permission to do that."
+  players-only: "<red>Only players can use this command."
+  no-economy: "<red>No economy is available right now. Tell an admin."
+  no-key: "<red>You need a <key> to open this crate."
+  already-opening: "<red>You're already opening a crate."
+  won: "<green>You won <reward> from the <crate>!"
+  great-win-title: "<gold><bold>GREAT WIN!"
+  broadcast-win: "<gold><player> won <reward> from a <crate>!"
+  crate-protected: "<red>You can't break a crate. Admins: use /crate remove."
+  crate-set: "<green>That block is now a <crate>."
+  crate-removed: "<green>Crate removed."
+  not-a-crate: "<red>That block isn't a crate."
+  already-crate: "<red>That block is already a crate."
+  look-at-block: "<red>Look at a block within 5 blocks first."
+  unknown-crate: "<red>Unknown crate. Available: <list>"
+  player-not-found: "<red>Player not found (they must be online)."
+  key-given: "<green>Gave <amount>x <key> to <player>."
+  key-received: "<green>You received <amount>x <key>."
+  invalid-amount: "<red>Amount must be a number from 1 to 2304."
+  crate-list: "<yellow>Crates: <white><list>"
+  usage: "<red>Usage: /crate <preview|set|remove|givekey|list|reload>"
+  reloaded: "<green>Reloaded <count> crate(s)."
